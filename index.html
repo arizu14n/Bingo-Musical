@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Musical</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bingo Musical</h1>
+
+        <!-- Sección de Configuración Inicial -->
+        <div id="setup-section" class="card">
+            <h2>Paso 1: Configuración del Bingo</h2>
+            <div class="form-group">
+                <label for="total-songs">Número total de canciones para el bingo:</label>
+                <input type="number" id="total-songs" min="1" value="18">
+            </div>
+            <div class="form-group">
+                <label for="card-size">Número de canciones por cartón:</label>
+                <input type="number" id="card-size" min="1" value="6">
+            </div>
+            <button id="start-setup-btn">Iniciar Ingreso de Canciones</button>
+            <button id="load-defaults-btn" style="background-color: #4CAF50;">Cargar Canciones de Ejemplo</button>
+        </div>
+
+        <!-- Sección para Ingresar Canciones (oculta al inicio) -->
+        <div id="song-input-section" class="card" style="display: none;">
+            <h2>Paso 2: Ingresa las Canciones</h2>
+            <form id="song-form"></form>
+            <button id="save-songs-btn">Crear Universo de Canciones</button>
+        </div>
+
+        <!-- Controles Principales (ocultos al inicio) -->
+        <div id="main-controls" class="card" style="display: none;">
+            <h2>Paso 3: Generar y Jugar</h2>
+            <div class="form-group">
+                <label for="num-cards">Cantidad de cartones a generar:</label>
+                <input type="number" id="num-cards" value="10" min="1">
+            </div>
+            <button id="generate-cards-btn">Generar Cartones</button>
+            <button id="print-cards-btn" style="display: none;">Imprimir Cartones</button>
+            <button id="start-game-btn" style="display: none;">¡Empezar a Jugar!</button>
+        </div>
+        
+        <!-- Sección de Verificación (oculta al inicio) -->
+        <div id="verification-section" class="card" style="display: none;">
+            <h2>Verificar Cartón</h2>
+            <div class="form-group">
+                <label for="card-id-input">Ingresa el ID del cartón:</label>
+                <input type="text" id="card-id-input" placeholder="Ej: BINGO-001">
+            </div>
+            <button id="verify-card-btn">Verificar</button>
+            <div id="verification-result"></div>
+        </div>
+
+        <!-- Sección de Juego (oculta al inicio) -->
+        <div id="game-section" class="card" style="display: none;">
+            <h2 id="song-counter"></h2>
+            <div class="iframe-container">
+                <iframe id="youtube-player" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p id="playback-issue" style="display:none; text-align: center; margin-top: 10px;">
+                    ¿No puedes ver el video? 
+                    <a id="youtube-fallback-link" href="#" target="_blank" rel="noopener noreferrer">Ábrelo en YouTube</a>
+                </p>
+            </div>
+            <button id="next-song-btn">Siguiente Canción</button>
+        </div>
+
+        <!-- Área donde se mostrarán los cartones generados -->
+        <div id="card-display-area"></div>
+    </div>
+
+    <script src="default-songs.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
