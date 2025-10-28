@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const shuffledSongs = shuffleArray(songUniverse);
             const selectedSongs = shuffledSongs.slice(0, cardSize);
             
-            const card = { id: cardId, songs: selectedSongs };
+            const card = { id: cardId, songs: selectedSongs, sent: false };
             generatedCards.push(card);
             
             displayCard(card);
@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cardElement.classList.add('bingo-card');
         
         let songsHTML = '';
+        let whatsAppMessageSongs = '';
         card.songs.forEach(song => {
             songsHTML += `
                 <div class="song-item">
@@ -181,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="song-artist">${song.artist}</div>
                 </div>
             `;
+            whatsAppMessageSongs += `- ${song.title} - ${song.artist}\n`;
         });
 
         cardElement.innerHTML = `
@@ -191,6 +193,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${songsHTML}
             </div>
         `;
+
+        const whatsAppBtn = document.createElement('button');
+        whatsAppBtn.innerText = 'Enviar por WhatsApp';
+        whatsAppBtn.classList.add('whatsapp-btn');
+
+        if (card.sent) {
+            whatsAppBtn.disabled = true;
+            whatsAppBtn.innerText = 'Enviado';
+        }
+
+        whatsAppBtn.addEventListener('click', () => {
+            if (card.sent) return;
+
+            const message = `¡Hola! Este es tu cartón para el Bingo Musical:\n\n*ID del Cartón:* ${card.id}\n\n*Tus canciones son:*\n${whatsAppMessageSongs}\n¡Mucha suerte!`;
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+
+            card.sent = true;
+            whatsAppBtn.disabled = true;
+            whatsAppBtn.innerText = 'Enviado';
+        });
+
+        cardElement.appendChild(whatsAppBtn);
         cardDisplayArea.appendChild(cardElement);
     }
 

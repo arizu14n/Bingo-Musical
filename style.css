@@ -145,6 +145,17 @@ button:disabled {
     border: 1px solid #d1e0fc;
 }
 
+.whatsapp-btn {
+    background-color: #25D366; /* Color de WhatsApp */
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.whatsapp-btn:hover {
+    background-color: #1EAE54;
+}
+
 /* Reglas de Impresión */
 @media print {
     body {
